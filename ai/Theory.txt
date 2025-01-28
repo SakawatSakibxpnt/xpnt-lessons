@@ -1,0 +1,63 @@
+## AI Guide: From Basics to Advanced
+
+1. Understanding AI
+Machine Learning (ML): Requires manually provided features for training.
+Deep Learning: Automatically extracts features; supervised learning requires labeled data.
+Unsupervised & Self-Supervised Learning: No labeled data required.
+Large Language Models (LLMs) (e.g., GPT, BERT):
+Trained in a self-supervised manner by predicting missing text.
+Leverage vast amounts of unlabeled text for learning.
+Do not "learn" from user interactions but use pre-trained knowledge.
+
+2. Why AI Generates Different Responses
+Randomness in Sampling: Uses probabilistic methods like temperature, top-k, and top-p sampling.
+Contextual Understanding: Slight changes in input phrasing or context can lead to different answers.
+Transformer Architecture: Processes inputs dynamically, leading to nuanced, context-aware responses.
+
+3. What is Generative AI?
+Focuses on Creating New Content (text, images, music, etc.).
+Popular Tools:
+ChatGPT (text generation)
+DALL·E (image generation)
+DeepSeek, Midjourney, Stable Diffusion (various content generation tasks)
+Works by learning patterns from training data and generating outputs based on them.
+
+4. Agentic AI: AI That Takes Action
+Focuses on decision-making and task execution.
+Examples:
+Autonomous robots, self-driving cars, AI assistants.
+Core Components:
+LLMs – For language understanding and response generation.
+Decision-Making Modules – Algorithms that determine the best action.
+Memory/State Tracking – Maintains context across interactions.
+Action Execution – Interfaces with APIs, tools, or physical systems.
+
+How It Works:
+User Input → LLM processes it.
+Decision-Making → AI determines the best action.
+Action Execution → AI performs a task (e.g., booking a ticket, sending an email).
+
+
+# Retrieval-Augmented Generation (RAG)
+AI framework that enhances LLMs by integrating external knowledge retrieval.
+Not a standalone system; works with a language model (LLM).
+
+How RAG Works (Step-by-Step Flow)
+User Query: "What is AI?"
+FAISS (or other vector search):
+Converts query into an embedding vector.
+Performs a similarity search in the database.
+Retrieves top relevant documents.
+LLM Processing:
+Combines user query + retrieved documents as context.
+Final AI Response:
+Generates a well-informed, grounded answer.
+
+# LangChain & Related Tools
+LangChain: Core framework for building AI agents (chains, tools, memory).
+LangGraph: Extends LangChain for multi-actor, stateful workflows.
+LangSmith: Adds observability and debugging capabilities to LangChain applications.
+
+
+
+
