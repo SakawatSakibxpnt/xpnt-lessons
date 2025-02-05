@@ -1,0 +1,127 @@
+**Hussein Nasser**
+
+------------------------------------------------------------------------------------------------
+## OSI Model (ChatGPT):
+**Complete Flow**
+**Scenario:
+You're using a laptop connected to a router via Wi-Fi.
+You open Chrome and enter https://www.youtube.com.
+The request goes through multiple layers before reaching YouTube’s server.
+
+>> Application Layer (Layer 7) → In Your Browser (Chrome)
+    📍 Location: Browser (Chrome) on your laptop
+    ✅ Chrome uses HTTPS (which is HTTP + TLS encryption).
+    ✅ It forms the request to fetch https://www.youtube.com.
+    ✅ The request includes:
+    The URL (youtube.com).
+    Headers (like cookies, user-agent).
+    Data (if submitting a form, etc.).
+    ➡ Passes the request to the Transport Layer.
+
+
+>> Transport Layer (Layer 4) → In Your Laptop’s OS (Kernel)
+    📍 Location: Operating System (Windows, macOS, Linux) - TCP/UDP stack
+    ✅ The OS decides which transport protocol to use:
+    Since HTTPS uses TCP, it selects TCP (not UDP).
+    ✅ Breaks the request into smaller chunks called segments.
+    ✅ Adds a TCP header with:
+    Source port (random, e.g., 50234) (Assigned by OS).
+    Destination port (443 - HTTPS).
+    ➡ Passes the segment to the Network Layer.
+
+
+>> Network Layer (Layer 3) → In Your Laptop’s OS (Kernel)
+    📍 Location: Operating System (IP Stack - part of OS networking)
+    ✅ Adds an IP header containing:
+    Source IP (Your laptop's IP, e.g., 192.168.1.10).
+    Destination IP (YouTube’s IP, e.g., 142.250.190.14).
+    ✅ Determines that the next hop is the router (gateway 192.168.1.1).
+    ➡ Passes the packet to the Data Link Layer.
+    Note: (OS) does not directly know YouTube’s IP address. Instead, it uses the Domain Name System (DNS) to find the IP.
+
+
+>> Data Link Layer (Layer 2) → In Your Laptop’s Network Card (Wi-Fi Adapter)
+    📍 Location: Wi-Fi Adapter (Hardware in Your Laptop)
+    ✅ Converts the IP packet into a Frame.
+    ✅ Adds a MAC header with:
+    Source MAC: Your laptop’s Wi-Fi MAC (e.g., AA:BB:CC:DD:EE:01).
+    Destination MAC: Your router’s MAC (e.g., AA:BB:CC:DD:EE:02).
+    ➡ Passes the frame to the Physical Layer.
+
+
+>> Physical Layer (Layer 1) → Wi-Fi Transmission
+    📍 Location: Wi-Fi Radio Signals (Router & Laptop Wi-Fi Antenna)
+    ✅ Converts the frame into radio waves and transmits it wirelessly to the router.
+    ➡ Router receives the signal.
+
+
+*****************📌 What Happens at the Router?***************
+
+>> Physical Layer (Layer 1) → Router Receives the Signal
+    📍 Location: Router’s Wi-Fi Antenna
+    ✅ The router receives the Wi-Fi signal and converts it back into electrical signals (bits).
+    ➡ Passes it to the Data Link Layer.
+
+
+>> Data Link Layer (Layer 2) → Router’s Network Interface
+    📍 Location: Router’s Network Interface (Wi-Fi & Ethernet)
+    ✅ Router checks the MAC address:
+    Sees that it is meant for the router.
+    ✅ Removes the MAC header and passes the data to the Network Layer.
+    ➡ Passes it to the Network Layer.
+
+
+>> Network Layer (Layer 3) → Router’s IP Processing
+    📍 Location: Router’s OS (Routing Software & NAT) 
+    ✅ Router checks the destination IP (YouTube’s IP).
+    ✅ Uses Network Address Translation (NAT) to replace your private IP (192.168.1.10) with the router’s public IP (e.g., 203.0.113.10).
+    ✅ Looks at the routing table and finds the next hop (your ISP).
+    ✅ Adds a new MAC address (Router’s WAN MAC & ISP’s MAC).
+    ➡ Passes it to the Data Link Layer again for transmission to ISP.
+
+
+>> Data Link & Physical Layers → Sending Data to ISP
+    📍 Location: Router’s WAN Port (Ethernet to ISP Modem)
+    ✅ The router transmits the packet over Ethernet (Layer 1).
+    ✅ The packet moves through the ISP’s network, Internet backbone, and YouTube’s servers.
+    ➡ YouTube receives the request.
+
+*****************************📌 YouTube’s Server Receives the Request*****************************
+YouTube’s server follows the same process in reverse:
+
+Physical Layer (Ethernet in Google Data Center) → Receives the signal.
+Data Link Layer → Reads MAC addresses.
+Network Layer → Reads the IP address, processes request.
+Transport Layer → Uses TCP (Port 443 for HTTPS).
+Application Layer (YouTube’s Web Server - Nginx, Apache, etc.) → Responds to your request.
+➡ Response is sent back through the same layers in reverse order!
+
+----------------------------------------------------------------------------------------------------
+
+## Why is Private IP Replaced by Public IP? (NAT - Network Address Translation)
+Since private IPs cannot be used on the public internet, they need to be converted to a public IP before sending data to websites. This is done using Network Address Translation (NAT).
+
+💡 How NAT Works:
+
+Your laptop (192.168.1.10) sends a request to youtube.com (IP: 142.250.190.14).
+The router replaces your private IP (192.168.1.10) with its public IP (203.0.113.10).
+YouTube’s servers see the request as coming from 203.0.113.10 (not 192.168.1.10).
+When YouTube sends data back, it goes to 203.0.113.10.
+The router remaps the response back to your private IP (192.168.1.10).
+➡ This is how multiple devices in your home share a single public IP.
+
+✅ NAT enables multiple devices to access the internet using a single public IP.
+
+----------------------------------------------------------------------------------------------------
+IP addresses (Layer 3) are for logical addressing and routing across networks.
+MAC addresses (Layer 2) are for actual data transmission over a physical link (Ethernet/Wi-Fi).
+🛑 Key Rule:
+A device can only send data directly to another device within the same physical network using MAC addresses.
+
+🔹 The router cannot send an IP packet directly to the ISP router just by knowing its IP.
+🔹 It must encapsulate the packet in an Ethernet frame that includes a MAC address so it can be physically transmitted over the local network (wired or wireless).
+
+Your router is connected to the ISP router via a physical link (Ethernet or Fiber).
+Ethernet and Wi-Fi don't understand IP addresses—they only deliver packets based on MAC addresses.
+So, before sending data, the router must find the MAC address of the ISP's router using ARP (Address Resolution Protocol).
+----------------------------------------------------------------------------------------------------

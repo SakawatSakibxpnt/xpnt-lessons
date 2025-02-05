@@ -58,6 +58,10 @@ LangChain: Core framework for building AI agents (chains, tools, memory).
 LangGraph: Extends LangChain for multi-actor, stateful workflows.
 LangSmith: Adds observability and debugging capabilities to LangChain applications.
 
+# Computer Using Agent (CUA) :  Refers to an AI-driven agent that interacts with a computer system on 
+behalf of a user. Unlike a Conversational User Agent (CUA), which focuses on dialogue and natural language
+interactions, a Computer Using Agent is more about performing tasks within a computer environment.
+EX. openAI operators, Browser use, LaVague, etc.
 
 
 
