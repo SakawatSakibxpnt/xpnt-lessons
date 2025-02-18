@@ -1,0 +1,68 @@
+ **Codevolution:Node.js basic**
+
+ ---------------------------------------------------------------------
+ Node.js Core components:
+ - Javascript Library
+ - C++ Library
+ - Dependencies: V8, libuv, zlib,crypto etc.
+ ---------------------------------------------------------------------
+ ## Javascript Engine: 
+ (V8-Google, SpiderMonkey-Mozilla, Chakra-Microsoft, JavaScriptCore-Apple)
+ ## V8:
+ - written in C++
+ - compiles JS to native machine code
+ ---------------------------------------------------------------------
+ ## Types of Modules:
+ - Local Modules 
+ - Buillt-in Modules/Core module (ex. path, event, fs, stream, http)
+ - Third-party Modules
+---------------------------------------------------------------------
+## Callbacks: 
+- Synnchronous (immeediate)
+- Asynchronous (delayed)
+---------------------------------------------------------------------
+## Event emitter:
+- Event emitter is a class
+---------------------------------------------------------------------
+## Streams & Buffers:
+- Streams: Sequential data flow
+- Buffers: Temporary storage for data
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+## Main Components for Node.js code execution:
+- V8 Engine (Memory Heap, Call Stack (main thread))
+- libuv (Kernel, Thread pool)
+- Event loop
+---------------------------------------------------------------------
+## libuv:
+- Cross platform library
+- Handles all the asynchronous operations for Node.js using thread pool, kernel and event loop
+- libuv decide when to use thread pool and when to use kernel
+---------------------------------------------------------------------
+## Thread Pool:
+- Thread pool is a group of threads that are used to execute specific tasks
+- used for specific asynchronous operations like file I/O (reading files), DNS resolution, and cryptographic tasks
+- it does not handle CPU-bound tasks.
+- Increasing the thread pool size beyond a certain point (e.g., 8–16 threads) often provides diminishing returns
+---------------------------------------------------------------------
+## Kernel:
+- Kernel is the core of the operating system that manages the hardware resources and provides basic services to the other components of the system.
+- used for Network operations (e.g., making HTTP requests, listening for incoming connections), Timers (e.g., setTimeout, setInterval), 
+---------------------------------------------------------------------
+## Event Loop:
+- The event loop in Node.js is responsible for managing asynchronous operations. When an asynchronous operation (e.g., reading a file) 
+is initiated, the main thread delegates the task to the thread pool (for I/O-bound tasks) or to the operating system (for network I/O). Once the operation completes, 
+the callback or resolved Promise is placed back in the event loop queue to be executed by the main thread.
+---------------------------------------------------------------------
+## Worker Threads:
+- Developers can use worker_threads or child_process for parallel processing.
+- The worker_threads module creates entirely separate threads that are not part of the thread pool managed by libuv.
+- Increasing the thread pool size allows more concurrent I/O operations but does not affect worker threads.
+- Each worker thread runs on a separate core, so creating more worker threads than available cores can lead to diminishing returns due to context-switching overhead.
+- Number of concurrent request can be handle depend on the number of cores available.
+---------------------------------------------------------------------
+## Async/await: 
+The async/await syntax is syntactic sugar built on top of Promises. It allows you to write asynchronous code that looks synchronous, but it does not inherently change where the code executes.
+Whether an async function runs in the main thread or the thread pool depends entirely on the nature of the operations being performed inside the function.
+---------------------------------------------------------------------

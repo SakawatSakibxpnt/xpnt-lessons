@@ -1,0 +1,21 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@langchain/community": "^0.3.29",
+    "@langchain/openai": "^0.4.3",
+    "@supabase/supabase-js": "^2.48.1",
+    "cohere-ai": "^7.15.4",
+    "dotenv": "^16.4.7",
+    "langchain": "^0.3.15"
+  }
+}
