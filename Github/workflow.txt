@@ -1,0 +1,12 @@
+## You added code :
+--> in your branch
+step 1: git add .
+step 2: git commit -m "message"
+step 3: git pull origin <branch you like to merge>
+------> if conflict arise:
+step a: resolve conflict
+step b: git add <conflicted-files>
+step c: git commit -m "Resolved merge"
+------> 
+step 4: git push origin sakib
+step 5: Create pull request

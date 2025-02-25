@@ -1,0 +1,5 @@
+sm	640px	Small screens (e.g., landscape phones)
+md	768px	Medium screens (e.g., tablets)
+lg	1024px	Large screens (e.g., laptops, desktops)
+xl	1280px	Extra-large screens (e.g., larger desktops)
+2xl	1536px	2x-extra-large screens (e.g., ultra-wide monitors)
